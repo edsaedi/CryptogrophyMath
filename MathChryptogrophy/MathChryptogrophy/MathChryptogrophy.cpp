@@ -1,7 +1,8 @@
 #include <iostream>
 #include <memory>
 #include <vector>
-
+#include <math.h>
+#include "Pair.h"
 std::vector<int> Factor(int number)
 {
 	std::vector<int> factors;
@@ -52,6 +53,46 @@ bool Prime(int num)
 	return false;
 }
 
+void MersennePrime()
+{
+	int count = 0;
+	int power = 0;
+	while (count < 9)
+	{
+		int number = pow(2, power) - 1;
+		if (Prime(number))
+		{
+			std::cout << number << "\n";
+			count++;
+		}
+		power++;
+	}
+}
+
+int ModularMultiplicativeInverse(int number1, int number2)
+{
+	int answer = -1;
+	bool rp = RelativelyPrime(number1, number2);
+	if (!rp)
+	{
+		throw new _exception();
+	}
+	while (rp)
+	{
+		int leftSide = (number1 * answer) % number2;
+		if (leftSide == 1)
+			return answer;
+		answer++;
+	}
+	return answer;
+}
+
+std::vector<std::string> Permutations(std::string gstring)
+{
+	std::vector<std::string> ans;
+	return ans;
+}
+
 int main()
 {
 	//Factors
@@ -94,7 +135,8 @@ int main()
 		std::cout << "It is not relatively prime.";
 	}*/
 
-	std::cout << "Enter in a number.";
+	//Prime Numbers
+	/*std::cout << "Enter in a number.";
 	int number{};
 	std::cin >> number;
 	bool pr = Prime(number);
@@ -105,5 +147,64 @@ int main()
 	else
 	{
 		std::cout << "False";
-	}
+	}*/
+
+	//Mersenne Prime
+	//MersennePrime();
+
+	//UniquePairs of RelativelyPrimeNumbers
+	/*for (size_t i = 0; i < 101; i++)
+	{
+		for (size_t j = i; j < 101; j++)
+		{
+			if (RelativelyPrime(i, j))
+			{
+				std::cout << i << ", " << j << "\n";
+			}
+		}
+	}*/
+
+	/*Pair p(5, 4);
+	Pair t(4, 5);
+	Pair z(5, 6);
+
+	std::cout << (p == z) << std::endl;*/
+
+	/*std::vector<Pair> pairs;
+	for (size_t i = 0; i < 101; i++)
+	{
+		for (size_t j = 0; j < 101; j++)
+		{
+			Pair p(i, j);
+			if (RelativelyPrime(i, j))
+			{
+				bool unique = true;
+				for (size_t k = 0; k < pairs.size(); k++)
+				{
+					if (pairs[k] == p)
+					{
+						unique = false;
+						break;
+					}
+				}
+				if (unique)
+				{
+					pairs.push_back(p);
+					std::cout << i << ", " << j << "\n";
+				}
+			}
+		}
+	}*/
+
+	//Modular multiplicative inverse
+	/*std::cout << "Enter in a number";
+	int num1;
+	std::cin >> num1;
+	std::cout << "Enter in a number";
+	int num2;
+	std::cin >> num2;
+
+	std::cout << ModularMultiplicativeInverse(num1, num2);*/
+
+
 }
