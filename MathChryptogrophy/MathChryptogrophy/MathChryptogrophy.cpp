@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include <math.h>
+#include <set>
 #include "Pair.h"
 std::vector<int> Factor(int number)
 {
@@ -87,10 +88,28 @@ int ModularMultiplicativeInverse(int number1, int number2)
 	return answer;
 }
 
-std::vector<std::string> Permutations(std::string gstring)
+void Permutations(std::set<std::string> &set, std::string a, int l, int r)
 {
-	std::vector<std::string> ans;
-	return ans;
+	//std::vector<std::string> ans;
+
+	if (l == r)
+	{
+		set.insert(a);
+		//std::cout << a << std::endl;
+		//ans.push_back(a);
+	}
+	else
+	{
+		for (size_t i = l; i <= r; i++)
+		{
+			std::swap(a[l], a[i]);
+			//ans.push_back(gstring);
+			Permutations(set, a, l + 1, r);
+			std::swap(a[l], a[i]);
+		}
+	}
+
+	//return ans;
 }
 
 int main()
@@ -206,5 +225,19 @@ int main()
 
 	std::cout << ModularMultiplicativeInverse(num1, num2);*/
 
+	std::cout << "Enter in a string to permutate \n";
+	std::string pstring;
+	std::cin >> pstring;
+	std::set<std::string> test;
+	Permutations(test, pstring, 0, pstring.size() - 1);
+	/*for (size_t i = 0; i < vect.size(); i++)
+	{
+		std::cout << vect[i] << "\n";
+	}*/
+
+	for (auto i : test)
+	{
+		std::cout << i << std::endl;
+	}
 
 }
